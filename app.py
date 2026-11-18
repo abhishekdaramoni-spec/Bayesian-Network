@@ -533,6 +533,15 @@ def api_predict():
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
+@app.route('/api/health', methods=['GET'])
+def api_health():
+    return jsonify({
+        'status': 'healthy',
+        'service': 'Hospital Management & Disease Prediction System',
+        'model_version': app.config.get('MODEL_VERSION', 'v1.2.0-DiscreteBayesian'),
+        'timestamp': datetime.utcnow().isoformat()
+    }), 200
+
 
 # -------------------------------------------------------------
 # DATABASE SEEDING & APP INITIALIZATION
